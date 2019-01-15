@@ -1,3 +1,14 @@
+# These will be downloaded or generated, too big to check in
+*.gtf.gz
+*.gtf
+*.sqlite
+
+
+
+# Auto-generated python .gitignore below:
+#
+#
+#
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
