@@ -1,12 +1,33 @@
 #!/usr/bin/env python3
 import gffutils,sys
+import os.path
 
 # field to get
 #ID_FIELD='transcript_id'
 ID_FIELD='gene_id'
 
+# command line arguments
+if len(sys.argv) < 3:
+    print("%s bedlike_file db.sqlite" % sys.argv[0], out=sys.stderr)
+    sys.exit(0)
+
+else:
+    # check for existence of given files
+    fail = False
+    if not os.path.isfile( sys.argv[1] ):
+        print("ERROR: %s first file argument not found" % sys.argv[1], out=sys.stderr)
+        fail = True
+    if not os.path.isfile( sys.argv[2] ):
+        print("ERROR: %s first file argument not found" % sys.argv[2], out=sys.stderr)
+        fail = True
+
+    if fail:
+        print("File(s) not found. Quitting.")
+        sys.exit(1)
+
 # open database
-DB_PATH = '/projects/dcking@colostate.edu/support_data/annotations/wormbase/WS263.sqlite'
+#DB_PATH = '/projects/dcking@colostate.edu/support_data/annotations/wormbase/WS263.sqlite'
+DB_PATH = sys.argv[2]
 db = gffutils.FeatureDB(DB_PATH)
 
 upstream = 2000

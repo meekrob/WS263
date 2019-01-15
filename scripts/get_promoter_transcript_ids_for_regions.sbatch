@@ -14,12 +14,12 @@ PROJ_DIR=/projects/dcking@colostate.edu
 source $PROJ_DIR/paths.bashrc
 
 infile=$1
-outfile=${infile%%.*}.gene_ids
-cmd="python3 get_promoter_transcript_ids_for_regions.py $infile > $outfile"
+outfile=${infile/.bedlike/.gene_ids}
+cmd="python3 $PRJ/WS263-repo/scripts/get_promoter_transcript_ids_for_regions.py $infile $PRJ/WS263/WS263.sqlite > $outfile"
 echo $cmd
 time eval $cmd
 
-gene_id_file=${outfile/valerie_peaks_/}
+gene_id_file=${outfile}.filtered
 
 #cmd2="grep -v NA$ $outfile | cut -f 12 | collapse , > $gene_id_file"
 cmd2="grep -v NA$ $outfile | cut -f 12 | sed 's/Transcript://' > $gene_id_file"
